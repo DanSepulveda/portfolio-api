@@ -27,13 +27,13 @@ router.route('/technology/:id')
     .delete(passport, technologyControllers.deleteTechnology)
 
 // PROJECT
-// router.route('/projects')
-//     .get(projectControllers.getAllProjects)
-//     .post(projectControllers.createProject)
+router.route('/projects')
+    .get(projectControllers.getAllProjects)
+    .post(passport, projectControllers.createProject)
 
-// router.route('/project/:id')
-//     .get(projectControllers.getOneProject)
-//     .put(projectControllers.updateProject)
-//     .delete(projectControllers.deleteProject)
+router.route('/project/:id')
+    .get(projectControllers.getOneProject)
+    .put(passport, projectControllers.updateProject)
+    .delete(passport, projectControllers.deleteProject)
 
 module.exports = router
