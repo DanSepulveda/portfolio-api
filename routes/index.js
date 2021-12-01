@@ -2,15 +2,17 @@ const express = require('express')
 const userControllers = require('../controllers/userControllers')
 const projectControllers = require('../controllers/projectControllers')
 const technologyControllers = require('../controllers/technologyControllers')
+const passport = require("passport")
 
 const router = express.Router()
 
+// passport.authenticate('jwt', { session: false })
 // USER
-// router.route('/newAdmin')
-//     .post(userControllers.createAdmin)
+router.route('/newAdmin')
+    .post(userControllers.createAdmin)
 
-// router.route('/login')
-//     .post(userControllers.login)
+router.route('/login')
+    .post(userControllers.login)
 
 // TECHNOLOGY
 router.route('/technologies')
