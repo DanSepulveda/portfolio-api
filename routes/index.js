@@ -6,11 +6,11 @@ const technologyControllers = require('../controllers/technologyControllers')
 const router = express.Router()
 
 // USER
-router.route('/newAdmin')
-    .post(userControllers.createAdmin)
+// router.route('/newAdmin')
+//     .post(userControllers.createAdmin)
 
-router.route('/login')
-    .post(userControllers.login)
+// router.route('/login')
+//     .post(userControllers.login)
 
 // TECHNOLOGY
 router.route('/technologies')
@@ -23,13 +23,13 @@ router.route('/technology/:id')
     .delete(technologyControllers.deleteTechnology)
 
 // PROJECT
-router.route('/projects')
-    .get(projectControllers.getAllProjects)
-    .post(projectControllers.createProject)
+// router.route('/projects')
+//     .get(projectControllers.getAllProjects)
+//     .post(projectControllers.createProject)
 
-router.route('/project/:id')
-    .get(projectControllers.getOneProject)
-    .put(projectControllers.updateProject)
-    .delete(projectControllers.deleteProject)
+// router.route('/project/:id')
+//     .get(projectControllers.getOneProject)
+//     .put(projectControllers.updateProject)
+//     .delete(projectControllers.deleteProject)
 
 module.exports = router
