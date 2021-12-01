@@ -6,13 +6,15 @@ const passport = require("passport")
 
 const router = express.Router()
 
-// passport.authenticate('jwt', { session: false })
 // USER
 router.route('/newAdmin')
-    .post(userControllers.createAdmin)
+    .post(passport.authenticate('jwt', { session: false }), userControllers.createAdmin)
 
 router.route('/login')
     .post(userControllers.login)
+
+router.route('/verifyToken')
+    .post(passport.authenticate('jwt', { session: false }), userControllers.verifyToken)
 
 // TECHNOLOGY
 router.route('/technologies')

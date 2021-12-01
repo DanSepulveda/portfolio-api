@@ -5,11 +5,11 @@ const jwt = require('jsonwebtoken')
 const userControllers = {
     createAdmin: async (req, res) => {
         const { username, password } = req.body
-        // const { key } = req.user.admin
+        const { key } = req.user.admin
         let hashedPass = bcrypt.hashSync(password, 10)
         try {
-            // let match = key && bcrypt.compareSync(process.env.SECRETORKEY, key)
-            // if (!match) throw new Error("key error")
+            let match = key && bcrypt.compareSync(process.env.SECRETORKEY, key)
+            if (!match) throw new Error("key error")
             const newKey = bcrypt.hashSync(process.env.SECRETORKEY)
             const user = new User({
                 username,
@@ -35,6 +35,9 @@ const userControllers = {
             res.json({ success: false, error: e.message })
         }
     },
+    verifyToken: (req, res) => {
+        res.status(200).json({ success: true, response: { username: req.user.username } })
+    }
 }
 
 module.exports = userControllers
