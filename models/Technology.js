@@ -10,7 +10,9 @@ const technologySchema = new mongoose.Schema({
             link: { type: String, required: true },
         }
     ],
-    category: { type: String, required: true }
+    category: { type: String, required: true },
+    order: { type: Number, required: true },
+    active: { type: Boolean, default: true }
 })
 
 const Technology = mongoose.model('technology', technologySchema)

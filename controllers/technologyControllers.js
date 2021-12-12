@@ -10,23 +10,17 @@ const technologyControllers = {
         }
     },
     createTechnology: async (req, res) => {
-        console.log(req.body)
-        const { name, languages, category } = req.body
+        const { name, languages, category, image, order, active } = req.body
         const newTech = new Technology({
             name,
-            // languages: JSON.parse(languages),
             languages,
-            category
+            category,
+            image,
+            order,
+            active
         })
         try {
             if (!req.user.admin) return res.status(401).send("You don't have access to do this.")
-            let picture = "kakaka"
-            const { image } = req.files
-            picture = `/${newTech._id}.${image.name.split('.')[image.name.split('.').length - 1]}`
-            image.mv(`${__dirname}/../assets/${newTech._id}.${image.name.split('.')[image.name.split('.').length - 1]}`, (err) => {
-                if (err) return console.log(err)
-            })
-            newTech.image = picture
             await newTech.save()
             res.status(200).json({ success: true, response: newTech })
         } catch (error) {
