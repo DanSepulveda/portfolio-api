@@ -2,15 +2,17 @@ const mongoose = require('mongoose')
 
 const projectSchema = new mongoose.Schema({
     name: { type: String, required: true },
-    shortDescription: { type: String, required: true },
-    longDescription: { type: String, required: true },
+    esDescription: { type: String, required: true },
+    enDescripcion: { type: String, required: true },
     images: { type: Array, required: true },
     techs: { type: Array, required: true },
-    webpage: { type: Array, default: null },
-    github: { type: Array, default: null },
-    youtube: { type: Array, default: null },
+    webpage: { type: String, default: null },
+    github: { type: String, default: null },
+    youtube: { type: String, default: null },
     active: { type: Boolean, default: true },
-    range: { type: Number, default: 1 }
+    order: { type: Number, required: true },
+    home: { type: Boolean, default: true },
+    main: { type: Boolean, default: true },
 })
 
 const Project = mongoose.model('project', projectSchema)

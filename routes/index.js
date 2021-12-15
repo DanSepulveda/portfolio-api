@@ -2,6 +2,7 @@ const express = require('express')
 const userControllers = require('../controllers/userControllers')
 const projectControllers = require('../controllers/projectControllers')
 const technologyControllers = require('../controllers/technologyControllers')
+const mailControllers = require('../controllers/mailControllers')
 const passport = require("passport").authenticate('jwt', { session: false })
 
 const router = express.Router()
@@ -35,5 +36,8 @@ router.route('/project/:id')
     .get(projectControllers.getOneProject)
     .put(passport, projectControllers.updateProject)
     .delete(passport, projectControllers.deleteProject)
+
+router.route('/sendMail')
+    .post(mailControllers.sendMail)
 
 module.exports = router
