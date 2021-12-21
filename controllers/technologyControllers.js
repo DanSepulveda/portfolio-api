@@ -4,6 +4,7 @@ const technologyControllers = {
     getAllTechnologies: async (req, res) => {
         try {
             let techs = await Technology.find()
+            techs.sort((a, b) => a.order - b.order)
             res.status(200).json({ success: true, response: techs })
         } catch (error) {
             res.json({ success: false, error: error.message })

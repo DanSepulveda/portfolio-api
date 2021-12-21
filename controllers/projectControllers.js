@@ -4,15 +4,25 @@ const projectControllers = {
     getAllProjects: async (req, res) => {
         try {
             let projects = await Project.find()
+            projects.sort((a, b) => a.order - b.order)
+            res.status(200).json({ success: true, response: projects })
+        } catch (error) {
+            res.json({ success: false, error: error.message })
+        }
+    },
+    getHomeProjects: async (req, res) => {
+        try {
+            let projects = await Project.find({ home: true })
+            projects.sort((a, b) => a.order - b.order)
             res.status(200).json({ success: true, response: projects })
         } catch (error) {
             res.json({ success: false, error: error.message })
         }
     },
     createProject: async (req, res) => {
-        const { name, description, images, techs, webpage, github, youtube, status, range } = req.body
+        const { name, esDescription, enDescription, images, techs, webpage, github, youtube, active, order, home, main } = req.body
         const newProject = new Project({
-            name, description, images, techs, webpage, github, youtube, status, range
+            name, esDescription, enDescription, images, techs, webpage, github, youtube, active, order, home, main
         })
         try {
             if (!req.user.admin) return res.status(401).send("You don't have access to do this.")

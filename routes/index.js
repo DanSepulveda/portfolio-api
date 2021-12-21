@@ -32,6 +32,9 @@ router.route('/projects')
     .get(projectControllers.getAllProjects)
     .post(passport, projectControllers.createProject)
 
+router.route('/projects/home')
+    .get(projectControllers.getHomeProjects)
+
 router.route('/project/:id')
     .get(projectControllers.getOneProject)
     .put(passport, projectControllers.updateProject)
