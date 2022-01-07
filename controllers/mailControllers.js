@@ -48,9 +48,6 @@ const mailControllers = {
                     margin: 0;
                     padding: 0;
                 }
-                p {
-                    font-family: Georgia, Times, 'Times New Roman', serif; color: #2f2f2f; line-height: inherit; text-align: center; font-size: 16px;
-                }
             </style>
             </head>
             <body style="background-color: #f9f9f9; width: 100%; display: flex; justify-content: center;">
