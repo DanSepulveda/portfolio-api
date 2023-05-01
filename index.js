@@ -1,8 +1,8 @@
-const functions = require("firebase-functions");
+const functions = require('firebase-functions')
 const express = require('express')
 const cors = require('cors')
 require('dotenv').config()
-require("./config/passport")
+require('./config/passport')
 require('./config/databse')
 const router = require('./routes/index')
 

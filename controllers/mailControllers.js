@@ -1,40 +1,42 @@
 const nodemailer = require('nodemailer')
 
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        type: 'oauth2',
-        user: process.env.USER,
-        pass: process.env.PASS,
-        clientId: process.env.CLIENTID,
-        clientSecret: process.env.CLIENTSECRET,
-        refreshToken: process.env.REFRESHTOKEN,
-    }
+  service: 'gmail',
+  auth: {
+    type: 'oauth2',
+    user: process.env.USER,
+    pass: process.env.PASS,
+    clientId: process.env.CLIENTID,
+    clientSecret: process.env.CLIENTSECRET,
+    refreshToken: process.env.REFRESHTOKEN,
+  },
 })
 
 const mailControllers = {
-    sendMail: async (req, res) => {
-        const { name, email, message, language } = req.body;
-        const texts = {}
+  sendMail: async (req, res) => {
+    const { name, email, message, language } = req.body
+    const texts = {}
 
-        if (language === 'es') {
-            texts.title = 'Mensaje Recibido!'
-            texts.greeting = 'Hola'
-            texts.message = 'Muchas gracias por contactarte conmigo. Te responderé lo antes posible. Esta es un copia de tu mensaje:'
-            texts.footer = '2022 © Todos los Derechos Reservados'
-        } else {
-            texts.title = 'Message Recieved!'
-            texts.greeting = 'Hi'
-            texts.message = 'Thank you very much for contacting me. I will answer you as soon as possible. This is a copy of your message:'
-            texts.footer = '2022 © All Rights Reserved'
-        }
+    if (language === 'es') {
+      texts.title = 'Mensaje Recibido!'
+      texts.greeting = 'Hola'
+      texts.message =
+        'Muchas gracias por contactarte conmigo. Te responderé lo antes posible. Esta es un copia de tu mensaje:'
+      texts.footer = '2022 © Todos los Derechos Reservados'
+    } else {
+      texts.title = 'Message Recieved!'
+      texts.greeting = 'Hi'
+      texts.message =
+        'Thank you very much for contacting me. I will answer you as soon as possible. This is a copy of your message:'
+      texts.footer = '2022 © All Rights Reserved'
+    }
 
-        const options = {
-            from: "Dansep <dansepdev@gmail.com>",
-            to: email,
-            bcc: 'dansepdev@gmail.com',
-            subject: texts.title,
-            html: `<!DOCTYPE html>
+    const options = {
+      from: 'Dansep <dansepdev@gmail.com>',
+      to: email,
+      bcc: 'dansepdev@gmail.com',
+      subject: texts.title,
+      html: `<!DOCTYPE html>
             <html lang=${language} xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
             <head>
                 <title></title>
@@ -118,15 +120,15 @@ const mailControllers = {
             </body>
             
             </html>`,
-        };
-
-        transporter.sendMail(options, (err, info) => {
-            if (err) {
-                return res.json({ success: false, response: err });
-            }
-            return res.json({ success: true, response: info });
-        });
     }
+
+    transporter.sendMail(options, (err, info) => {
+      if (err) {
+        return res.json({ success: false, response: err })
+      }
+      return res.json({ success: true, response: info })
+    })
+  },
 }
 
 module.exports = mailControllers
