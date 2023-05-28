@@ -1,3 +1,7 @@
 node_modules/
 .env
 credentials.json
+.env*
+.flaskenv*
+!.env.project
+!.env.vault
